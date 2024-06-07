@@ -1,10 +1,11 @@
-import React from 'react'
+import React ,{useEffect} from 'react'
 import { IoIosWarning } from "react-icons/io";
 import { MdError } from "react-icons/md";
 import { IoMdInformationCircle } from "react-icons/io";
 import { IoMdThumbsUp } from "react-icons/io";
 import { RxCross2 } from "react-icons/rx";
 import './Toaster.css';
+import useTimeout from '../hooks/useTimeout';
  const icons ={
     success: <IoMdThumbsUp size={35}/>,
     error:<MdError size={35}/>,
@@ -12,6 +13,10 @@ import './Toaster.css';
     warning:<IoIosWarning color='rgb(248 227 146)' size={35}/>
  }
 export default function Toaster({id , messege = 'this is a success messege' , type ='error',animation ,position,deleteToast}) {
+ console.log(id);
+  useTimeout(() =>{
+    deleteToast(id)
+});
   return (
     <div className={`toast ${type} ${animation+position} ${animation}`}>
         <div>{icons[type]}  </div>
